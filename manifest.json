@@ -2,15 +2,11 @@
   "name": "Discogsearch",
   "version": "1.0",
   "description": "Add search link to Music Streaming Service",
+  "permissions": ["https://*.discogs.com/"],
   "content_scripts": [
     {
-      "matches": [
-        "https://*.discogs.com/*"
-      ],
-      "js": [
-        "jquery-3.5.1.min.js",
-        "contentScript.js"
-      ]
+      "matches": ["https://*.discogs.com/*"],
+      "js": ["jquery-3.5.1.min.js", "contentScript.js"]
     }
   ],
   "web_accessible_resources": ["*.png"],
