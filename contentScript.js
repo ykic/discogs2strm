@@ -1,124 +1,177 @@
 $(function () {
   // watch pjax
-  const target = document.getElementById('pjax_container')
+  const target = document.getElementById("pjax_container");
   if (target !== null) {
-    const observer = new MutationObserver(records => {
-      console.log('update records')
-      $('#artist').each(function () {
-        const td = $(this).find('.title');
+    const observer = new MutationObserver((records) => {
+      console.log("update records");
+      $("#artist").each(function () {
+        console.log("artist dicography");
+        const artist = $(
+          "#page_content > div.profile > h1"
+        ).text();
+        const td = $(this).find(".title");
         td.each(function (i, e) {
-          const title = $(e).children('a').text().trim();
-          const spotify = createSpotify(artist + ' ' + title);
-          const youtube = createYouTube(artist + ' ' + title);
-          $(this).append(spotify);
-          $(this).append(youtube);
+          const title = $(e).children("a").text().trim();
+          $(e).append(createSpotify(artist + " " + title));
+          $(e).append(createAppleMusic(artist + " " + title));
+          $(e).append(createBandcamp(artist + " " + title));
+          $(e).append(createYouTube(artist + " " + title));
         });
       });
-    })
-    observer.observe(target, { childList: true })
+    });
+    observer.observe(target, { childList: true });
   }
 
   // page - artist
-  if (location.href.match('artist') !== null) {
-    console.log('artist page')
+  if (location.href.match("artist") !== null) {
+    console.log("artist page");
 
     // profile
-    const artist = $('#page_content > div.lr.group > div.left > div > div.profile > h1').text()
-    $('#page_content > div.lr.group > div.left > div > div.profile > h1').each(function (i, e) {
-      console.log('artist profile')
-      const spotify = createSpotify(artist);
-      const youtube = createYouTube(artist);
-
-      $(e).append(spotify);
-      $(e).append(youtube);
-    });
+    const artist = $(
+      "#page_content > div.lr.group > div.left > div > div.profile > h1"
+    ).text();
+    $("#page_content > div.lr.group > div.left > div > div.profile > h1").each(
+      function (i, e) {
+        console.log("artist profile");
+        $(e).append(createSpotify(artist));
+        $(e).append(createAppleMusic(artist));
+        $(e).append(createBandcamp(artist));
+        $(e).append(createYouTube(artist));
+      }
+    );
 
     // discography
-    $('#artist').each(function () {
-      console.log('artist dicography')
-      const td = $(this).find('.title');
+    $("#artist").each(function () {
+      console.log("artist dicography");
+      const td = $(this).find(".title");
       td.each(function (i, e) {
-        const title = $(e).children('a').text().trim();
-        const spotify = createSpotify(artist + ' ' + title);
-        const youtube = createYouTube(artist + ' ' + title);
-
-        $(e).append(spotify);
-        $(e).append(youtube);
+        const title = $(e).children("a").text().trim();
+        $(e).append(createSpotify(artist + " " + title));
+        $(e).append(createAppleMusic(artist + " " + title));
+        $(e).append(createBandcamp(artist + " " + title));
+        $(e).append(createYouTube(artist + " " + title));
       });
     });
   }
 
   // page - release master
-  if ((location.href.match('release') !== null) || (location.href.match('master') !== null)) {
-    console.log('release page')
+  if (
+    location.href.match("release") !== null ||
+    location.href.match("master") !== null
+  ) {
+    console.log("release page");
 
     // profile
-    $('#profile_title').each(function (i, e) {
-      console.log('release profile')
-      const album = document.getElementById('profile_title').innerText.trim()
-      const spotify = createSpotify(album);
-      const youtube = createYouTube(album);
-
-      $(e).append(spotify);
-      $(e).append(youtube);
+    $("#profile_title").each(function (i, e) {
+      console.log("release profile");
+      const album = document.getElementById("profile_title").innerText.trim();
+      $(e).append(createSpotify(album));
+      $(e).append(createAppleMusic(album));
+      $(e).append(createBandcamp(album));
+      $(e).append(createYouTube(album));
     });
 
     // tracks
-    $('#tracklist > div > table > tbody > tr').each(function (i, e) {
-      console.log('release tracks')
-      const track = $(e).find('.track').text().trim();
-      const spotify = createSpotify(track);
-      const youtube = createYouTube(track);
-
-      $(e).append(spotify);
-      $(e).append(youtube);
+    $("#tracklist > div > table > tbody > tr").each(function (i, e) {
+      console.log("release tracks");
+      const track = $(e).find(".track").text().trim();
+      $(e).append(createSpotify(track));
+      $(e).append(createAppleMusic(track));
+      $(e).append(createBandcamp(track));
+      $(e).append(createYouTube(track));
     });
   }
 
   // page - label
-  if (location.href.match('label') !== null) {
-    console.log('label page')
-    $('#page_content > div:nth-child(1) > div.left > div > div.profile').each(function (i, e) {
-      console.log('label title')
-      const ee = $(e).find('h1').text().trim();
-      const label = $(ee).text().trim();
-      const spotify = createSpotify(label);
-      const youtube = createYouTube(label);
+  if (location.href.match("label") !== null) {
+    // profile
+    console.log("label page");
+    const e = $("div.profile > h1");
+    const label = $(e).text().trim();
+    $(e).append(createSpotify(label));
+    $(e).append(createAppleMusic(label));
+    $(e).append(createBandcamp(label));
+    $(e).append(createYouTube(label));
 
-      $(ee).append(spotify);
-      $(ee).append(youtube);
+    // discography
+    $("table.cards >tbody > tr.card").each(function (i, e) {
+      const ea = $(e).find(".artist");
+      const artist = $(ea).text().trim();
+      $(ea).append(createSpotify(artist));
+      $(ea).append(createAppleMusic(artist));
+      $(ea).append(createBandcamp(artist));
+      $(ea).append(createYouTube(artist));
+
+      const ed = $(e).find(".title > a");
+      const disc = $(ed).text().trim();
+      $(ed).append(createSpotify(artist + " " + disc));
+      $(ed).append(createAppleMusic(artist + " " + disc));
+      $(ed).append(createBandcamp(artist + " " + disc));
+      $(ed).append(createYouTube(artist + " " + disc));
     });
   }
 
+  // page - label
+  if (location.href.match("lists") !== null) {
+    $("div.listitem_data > h3 > a").each(function (i, e) {
+      const disc = $(e).text().trim();
+      $(e).append(createSpotify(disc));
+      $(e).append(createYouTube(disc));
+      $(e).append(createBandcamp(disc));
+    });
+  }
 });
 
 // ** utils
 function createSpotify(search) {
   const a = document.createElement("a");
-  a.href = 'https://open.spotify.com/search/' + search;
+  a.href = "https://open.spotify.com/search/" + search;
   a.target = "_blank";
 
-  const img = createIcon('spotify.png');
+  const img = createIcon("spotify.png");
   $(a).append(img);
 
-  return a
+  return a;
+}
+
+function createAppleMusic(search) {
+  const a = document.createElement("a");
+  a.href = "https://music.apple.com/search?term=" + search;
+  a.target = "_blank";
+
+  const img = createIcon("apple.png");
+  $(a).append(img);
+
+  return a;
 }
 
 function createYouTube(search) {
   const a = document.createElement("a");
-  a.href = 'https://www.youtube.com/results?search_query=' + search
+  a.href = "https://www.youtube.com/results?search_query=" + search;
   a.target = "_blank";
 
-  const img = createIcon('youtube.png');
+  const img = createIcon("youtube.png");
   $(a).append(img);
 
-  return a
+  return a;
+}
+
+function createBandcamp(search) {
+  const a = document.createElement("a");
+  a.href = "https://bandcamp.com/search?q=" + search;
+  a.target = "_blank";
+
+  const img = createIcon("bandcamp.png");
+  $(a).append(img);
+
+  return a;
 }
 
 function createIcon(path) {
-  const img = document.createElement('img');
+  const img = document.createElement("img");
   img.src = chrome.extension.getURL(path);
   img.width = 20;
   img.height = 20;
+  img.padding = "10px";
   return img;
 }

@@ -1,7 +1,7 @@
 {
   "name": "Discogsearch",
   "version": "1.0",
-  "description": "Add Link to Music Streaming Service",
+  "description": "Add search link to Music Streaming Service",
   "content_scripts": [
     {
       "matches": [
