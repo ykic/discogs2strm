@@ -136,7 +136,7 @@ function createSpotify(search) {
   a.href = "https://open.spotify.com/search/" + search;
   a.target = "_blank";
 
-  const img = createIcon("spotify.png");
+  const img = createIcon("src/img/spotify.png");
   $(a).append(img);
 
   return a;
@@ -147,7 +147,7 @@ function createAppleMusic(search) {
   a.href = "https://music.apple.com/search?term=" + search;
   a.target = "_blank";
 
-  const img = createIcon("apple.png");
+  const img = createIcon("src/img/apple.png");
   $(a).append(img);
 
   return a;
@@ -158,7 +158,7 @@ function createYouTube(search) {
   a.href = "https://www.youtube.com/results?search_query=" + search;
   a.target = "_blank";
 
-  const img = createIcon("youtube.png");
+  const img = createIcon("src/img/youtube.png");
   $(a).append(img);
 
   return a;
@@ -169,7 +169,7 @@ function createBandcamp(search) {
   a.href = "https://bandcamp.com/search?q=" + search;
   a.target = "_blank";
 
-  const img = createIcon("bandcamp.png");
+  const img = createIcon("src/img/bandcamp.png");
   $(a).append(img);
 
   return a;
