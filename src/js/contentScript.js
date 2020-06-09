@@ -124,6 +124,7 @@ $(function () {
     $("div.listitem_data > h3 > a").each(function (i, e) {
       const disc = $(e).text().trim();
       $(e).append(createSpotify(disc));
+      $(e).append(createAppleMusic(disc));
       $(e).append(createYouTube(disc));
       $(e).append(createBandcamp(disc));
     });
