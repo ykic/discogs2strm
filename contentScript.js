@@ -72,13 +72,21 @@ $(function () {
     });
 
     // tracks
+    const artist = $('#profile_title -> a')
+    console.log(artist.text())
     $("#tracklist > div > table > tbody > tr").each(function (i, e) {
       console.log("release tracks");
-      const track = $(e).find(".track").text().trim();
-      $(e).append(createSpotify(track));
-      $(e).append(createAppleMusic(track));
-      $(e).append(createBandcamp(track));
-      $(e).append(createYouTube(track));
+      let trackArtist = $(e).find('td.tracklist_track_artists').text().slice(1).trim();
+      if (trackArtist.length === 0) {
+        trackArtist = $('#profile_title > span:nth-child(1) > span > a').text();
+      }
+      const track = $(e).find("span.tracklist_track_title").text().trim();
+      const s = trackArtist + ' ' + track;
+
+      $(e).append(createSpotify(s));
+      $(e).append(createAppleMusic(s));
+      $(e).append(createBandcamp(s));
+      $(e).append(createYouTube(s));
     });
   }
 
