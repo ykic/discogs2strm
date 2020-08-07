@@ -110,6 +110,7 @@ function createStreamingLinkIcons(e, search) {
   $(e).append(createSpotify(search));
   $(e).append(createAppleMusic(search));
   $(e).append(createBandcamp(search));
+  $(e).append(createBeatport(search));
   $(e).append(createYouTube(search));
 }
 
@@ -152,6 +153,17 @@ function createBandcamp(search) {
   a.target = "_blank";
 
   const img = createIcon("src/img/bandcamp.png");
+  $(a).append(img);
+
+  return a;
+}
+
+function createBeatport(search) {
+  const a = document.createElement("a");
+  a.href = "https://www.beatport.com/search?q=" + search;
+  a.target = "_blank";
+
+  const img = createIcon("src/img/beatport.png");
   $(a).append(img);
 
   return a;
